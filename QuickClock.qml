@@ -24,7 +24,7 @@ PluginComponent {
 	onPluginServiceChanged: loadStopwatch()
 
 	Timer {
-		interval: 1000
+		interval: root.popout_count > 0 && root.sw_running ? 100 : 1000
 		repeat: true
 		running: root.popout_count > 0 || root.sw_running || root.pill_seconds
 		triggeredOnStart: true
