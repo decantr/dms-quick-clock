@@ -24,7 +24,7 @@ PluginComponent {
 	onPluginServiceChanged: loadStopwatch()
 
 	Timer {
-		interval: root.popout_count > 0 && root.sw_running ? 100 : 1000
+		interval: root.popout_count > 0 && root.sw_running ? 16 : 1000
 		repeat: true
 		running: root.popout_count > 0 || root.sw_running || root.pill_seconds
 		triggeredOnStart: true
@@ -108,11 +108,11 @@ PluginComponent {
 		return (with_seconds ? text + ":" + pad(date.getSeconds(), 2) : text) + suffix;
 	}
 
-	function formatDuration(ms, with_tenths) {
+	function formatDuration(ms, with_millis) {
 		const total = Math.floor(ms / 1000);
 		const hours = Math.floor(total / 3600);
 		const text = (hours > 0 ? hours + ":" : "") + pad(Math.floor(total / 60) % 60, 2) + ":" + pad(total % 60, 2);
-		return with_tenths ? text + "." + Math.floor(ms / 100) % 10 : text;
+		return with_millis ? text + "." + pad(Math.floor(ms) % 1000, 3) : text;
 	}
 
 	function pillText() {
